@@ -1,0 +1,72 @@
+.post-container{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    margin: 0px auto;
+    width: 50%;
+    margin-bottom: 10px;
+    &:first-child{
+        margin-top: 10px;
+    }
+    &:hover{
+        background: red;
+    }
+
+    .details-container{
+        background-color: #ffffff;
+        width: 100%;
+
+        .post-header{
+            padding-left: 10px;
+            .author{
+                font-size: 22px;
+                margin: 0;
+            }
+        }
+        .footer{
+            display: flex;
+            padding-left: 10px;
+            align-items: center;
+            .footer-chat{
+                width: 25%;
+                img{
+                    width: 24px;
+                    height: 24px;
+                }
+                span{
+                    padding-left: 8px;
+                    font-size: 12px;
+                }
+            }
+            .chat-text{
+                display: inline-block;
+                color: #878a8c;
+                text-transform: capitalize;
+                vertical-align: middle;
+            }
+        }
+    }
+    .side-options{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: #f8f9fa;
+        width: 50px;
+
+        .arrow-logo{
+            width: 20px;
+            &:first-child{
+                padding-top: 10px;
+            }
+        }
+    }
+    .img-container{
+        display: flex;
+        justify-content: center;
+        overflow: hidden;
+        height: 400;
+    }
+    .image{
+        width: 80%;
+    }
+}

@@ -1,0 +1,35 @@
+<div
+    infinite-scroll
+    [infiniteScrollDistance]="scrollDistance"
+    [infiniteScrollUpDistance]="scrollUpDistance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScrollDown()"
+>
+    <div *ngFor="let record of data" class="post-container" (click)="openDetailPage(record)">
+        <div class="side-options">
+            <img src="../../assets/up-arrow.svg" alt="arrow-up" class="arrow-logo">
+            {{record.post_likes}}
+            <img src="../../assets/down-arrow.svg" alt="arrow-down" class="arrow-logo">
+        </div>
+        <div class="details-container">
+            <div class="post-header">
+                <h3 class="author"> {{record.post_title}}</h3>
+            </div>
+            <div class="img-container">
+                <img [src]="record.s3_image_location" alt="" class="image">
+            </div>
+            <div class="footer">
+                <div class="footer-chat">
+                    <img src="../../assets/chat-bubble.svg" alt="chat" class="chat-logo">
+                    <span class="chat-text">0 Comments</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div *ngFor="let record of data" class="posts-container">
+        <span class="author"> {{record.post_title}}</span>
+        <div class="img-container">
+            <img [src]="record.s3_image_location" alt="" class="image">
+        </div>
+    </div> -->
+</div>

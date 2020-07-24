@@ -1,0 +1,23 @@
+<mat-toolbar>
+  <mat-toolbar-row>
+    <div class="tab-buttons">
+      <mat-button-toggle-group name="fontStyle" #group="matButtonToggleGroup" [value]="lastVisitedRouter">
+        <mat-button-toggle [routerLink]="'/trending'" value='trending'>Trending</mat-button-toggle>
+        <mat-button-toggle [routerLink]="'/hot'" value='hot'>Hot</mat-button-toggle>
+        <mat-button-toggle [routerLink]="'/new'" value='new'>New</mat-button-toggle>
+      </mat-button-toggle-group>
+    </div>
+    {{isLoggedIn}}
+    <div class="auth" *ngIf="!isLoggedIn; else elseBlock">
+      <button mat-raised-button color="primary">Sign In</button>
+      <button mat-raised-button color="primary" (click)="openDialog()">Register</button>
+    </div>
+    <ng-template #elseBlock>
+      <button mat-raised-button color="primary" (click)="openUpload()">Upload</button>
+    </ng-template>
+  </mat-toolbar-row>
+</mat-toolbar>
+<!-- <amplify-authenticator></amplify-authenticator> -->
+<amplify-sign-out button-text="Custom Text"></amplify-sign-out>
+<router-outlet></router-outlet>
+  

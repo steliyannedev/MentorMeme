@@ -1,0 +1,10 @@
+{
+	"auth": {
+		"mentormeme50cd8119": {
+			"service": "Cognito",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [],
+			"customAuth": false
+		}
+	}
+}
