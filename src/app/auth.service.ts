@@ -29,7 +29,7 @@ export class AuthService {
   readonly auth$ = this._authState.asObservable();
   readonly isLoggedIn$ = this.auth$.pipe(map(state => state.isLoggedIn))
 
-  constructor() { 
+  constructor() {
     Auth.currentAuthenticatedUser().then(
       (user: any) => this.setUser(user),
       _err => this._authState.next(initialAuthState)
@@ -46,7 +46,6 @@ export class AuthService {
     if (!user) {
       return;
     }
-
     const {
       attributes: { sub: id, email },
       username

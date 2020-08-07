@@ -9,12 +9,8 @@ export class DragAndDropComponent {
   @ViewChild("fileDropRef", { static: false }) fileDropEl: ElementRef;
   files: any[] = [];
 
-  /**
-   * on file drop handler
-   */
   onFileDropped($event) {
     this.prepareFilesList($event);
-    // console.log($event[0])
     this.getBase64($event[0])
   }
 
@@ -29,17 +25,10 @@ export class DragAndDropComponent {
     };
  }
 
-  /**
-   * handle file from browsing
-   */
   fileBrowseHandler(files) {
     this.prepareFilesList(files);
   }
 
-  /**
-   * Delete file from files list
-   * @param index (File index)
-   */
   deleteFile(index: number) {
     if (this.files[index].progress < 100) {
       console.log("Upload in progress.");
@@ -48,9 +37,6 @@ export class DragAndDropComponent {
     this.files.splice(index, 1);
   }
 
-  /**
-   * Simulate the upload process
-   */
   uploadFilesSimulator(index: number) {
     setTimeout(() => {
       if (index === this.files.length) {
@@ -68,10 +54,6 @@ export class DragAndDropComponent {
     }, 1000);
   }
 
-  /**
-   * Convert Files list to normal array list
-   * @param files (Files List)
-   */
   prepareFilesList(files: Array<any>) {
     for (const item of files) {
       item.progress = 0;
@@ -81,11 +63,6 @@ export class DragAndDropComponent {
     this.uploadFilesSimulator(0);
   }
 
-  /**
-   * format bytes
-   * @param bytes (File size in bytes)
-   * @param decimals (Decimals point)
-   */
   formatBytes(bytes, decimals = 2) {
     if (bytes === 0) {
       return "0 Bytes";

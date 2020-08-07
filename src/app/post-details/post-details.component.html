@@ -1,1 +1,40 @@
-<p>post-details works!</p>
+<div class="background-container">
+    <div class="inner-background">
+        <div class="inner-container">
+            <div class="side-options">
+                <img src="../../assets/up-arrow.svg" alt="arrow-up" class="arrow-logo">
+                {{data.post_likes}}
+                <img src="../../assets/down-arrow.svg" alt="arrow-down" class="arrow-logo">
+            </div>
+            <div class="details-container">
+                <div class="post-header">
+                    <span class="points-comments">
+                        Posted by {{data.post_author}} 0 hours ago
+                    </span>
+                    <h3 class="author"> {{data.post_title}}</h3>
+                </div>
+                <div class="img-container">
+                    <img [src]="data.s3_image_location" alt="" class="image">
+                </div>
+                <div class="container">
+                    <div class="card">
+                        <div class="commentbox">
+                            <div class="col-12 col-sm-12 header">
+                                <h4>Comments ({{count}})</h4>
+                            </div>
+                            <div class="col-12 col-sm-12 body">
+                                <div class="comment-container">
+                                        <div class="comment-form">
+                                            <app-commentbox (usercomment)="receiveComment($event)"></app-commentbox>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                        <app-comments [postComment]="comments" (countComments)="recieveCount($event)"></app-comments>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

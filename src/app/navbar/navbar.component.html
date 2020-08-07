@@ -7,17 +7,15 @@
         <mat-button-toggle [routerLink]="'/new'" value='new'>New</mat-button-toggle>
       </mat-button-toggle-group>
     </div>
-    {{isLoggedIn}}
     <div class="auth" *ngIf="!isLoggedIn; else elseBlock">
       <button mat-raised-button color="primary">Sign In</button>
       <button mat-raised-button color="primary" (click)="openDialog()">Register</button>
     </div>
     <ng-template #elseBlock>
-      <button mat-raised-button color="primary" (click)="openUpload()">Upload</button>
+      <button mat-raised-button color="primary" (click)="openUpload()" class="asd">Upload</button>
+      <button mat-raised-button color="primary" (click)="logOut()">Logout</button>
     </ng-template>
   </mat-toolbar-row>
 </mat-toolbar>
-<!-- <amplify-authenticator></amplify-authenticator> -->
-<amplify-sign-out button-text="Custom Text"></amplify-sign-out>
 <router-outlet></router-outlet>
   

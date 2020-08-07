@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, Event, NavigationStart } from '@angular/router'
-import {MatDialog} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {DialogComponent} from '../dialog/dialog.component'
 import { AuthService } from '../auth.service';
 import {DragAndDropComponent} from '../drag-and-drop/drag-and-drop.component'
+import {Auth} from 'aws-amplify';
 
 
 @Component({
@@ -16,7 +17,6 @@ export class NavbarComponent implements OnInit {
 
   lastVisitedRouter: string;
   isLoggedIn: boolean;
-
   constructor(private route: Router, public dialog: MatDialog, private authService: AuthService) { }
 
   ngOnInit(): void {
@@ -34,9 +34,20 @@ export class NavbarComponent implements OnInit {
   })
   }
   openDialog(): void{
-    this.dialog.open(DialogComponent)
+    console.log(this.lastVisitedRouter)
+    this.dialog.open(DialogComponent);
+    // this.authService.isLoggedIn$.subscribe(isLogged => {
+    //   if(isLogged){
+    //     console.log('asd')
+    //   }
+    // })
+    // dialogRef.close()
   }
+
   openUpload(): void{
     this.dialog.open(DragAndDropComponent)
+  }
+  logOut(): void{
+    Auth.signOut()
   }
 }

@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http'
 
+import { FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainViewComponent } from './main-view/main-view.component';
@@ -28,6 +29,8 @@ import { DragAndDropComponent } from './drag-and-drop/drag-and-drop.component';
 import { DragAndDropDirective } from './drag-and-drop.directive';
 import { ProgressComponent } from './progress/progress.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
+import { CommentboxComponent } from './commentbox/commentbox.component';
+import { CommentsComponent } from './comments/comments.component';
 
 /* Configure Amplify resources */
 Amplify.configure(awsconfig);
@@ -45,7 +48,9 @@ Amplify.configure(awsconfig);
     DragAndDropComponent,
     DragAndDropDirective,
     ProgressComponent,
-    PostDetailsComponent
+    PostDetailsComponent,
+    CommentboxComponent,
+    CommentsComponent
   ],
   imports: [
     BrowserModule,
@@ -55,12 +60,14 @@ Amplify.configure(awsconfig);
     InfiniteScrollModule,
     BrowserAnimationsModule,
     MatToolbarModule,
+    FormsModule,
+    ReactiveFormsModule,
     MatButtonModule,
     MatButtonToggleModule,
     AmplifyUIAngularModule ,
     MatDialogModule
   ],
-  providers: [],
+  providers: [DialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {
