@@ -34,6 +34,14 @@
                     padding-left: 8px;
                     font-size: 12px;
                 }
+                button{
+                    padding: 2px 3px 2px 3px;
+                    margin: 2px 0px;
+                    border: none;
+                    background: none;
+                    border-radius: 3px;
+                }
+                button:hover {background-color: #e8e8e8}
             }
             .chat-text{
                 display: inline-block;

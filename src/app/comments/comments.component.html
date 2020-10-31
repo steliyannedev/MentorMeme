@@ -3,11 +3,11 @@
     <ul *ngIf="postComment?.length>0">
         <li *ngFor="let post of postComment; let i = index;">
             <div class="col-12 col-sm-12 comment-container">
-                    <p>{{post.commentTxt}}</p>
+                    <p>{{post.commnet}}</p>
                     <div class="actions">
-                        <span>{{post.currentDate | date: 'dd/MM/yyyy'}}</span>
+                        <span>{{post.created_on | date: 'dd/MM/yyyy'}}</span>
                         <span class="divider"></span>
-                        <button class="btn btn-sm btn-danger" (click)="removeComment(i)">
+                        <button class="btn btn-sm btn-danger" (click)="removeComment(post.comment_id)">
                             <i class="fa fa-trash"></i>
                         </button>
                 </div>

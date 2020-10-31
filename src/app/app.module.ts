@@ -18,6 +18,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatInputModule} from '@angular/material/input';
+
 import { AuthService } from './auth.service'
 import { DialogComponent } from './dialog/dialog.component';
 
@@ -31,6 +34,15 @@ import { ProgressComponent } from './progress/progress.component';
 import { PostDetailsComponent } from './post-details/post-details.component';
 import { CommentboxComponent } from './commentbox/commentbox.component';
 import { CommentsComponent } from './comments/comments.component';
+
+import { StoreModule } from '@ngrx/store'
+import { StoreDevtoolsModule } from '@ngrx/store-devtools'
+import { postsReducer } from './new/new.reducer'
+import { EffectsModule } from '@ngrx/effects';
+import { PostEffects } from './effects/posts.effects';
+import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
+import { ShareIconsModule } from 'ngx-sharebuttons/icons';
+import { PageContainerComponent } from './page-container/page-container.component';
 
 /* Configure Amplify resources */
 Amplify.configure(awsconfig);
@@ -50,7 +62,8 @@ Amplify.configure(awsconfig);
     ProgressComponent,
     PostDetailsComponent,
     CommentboxComponent,
-    CommentsComponent
+    CommentsComponent,
+    PageContainerComponent
   ],
   imports: [
     BrowserModule,
@@ -64,8 +77,17 @@ Amplify.configure(awsconfig);
     ReactiveFormsModule,
     MatButtonModule,
     MatButtonToggleModule,
-    AmplifyUIAngularModule ,
-    MatDialogModule
+    MatInputModule,
+    AmplifyUIAngularModule,
+    ShareButtonsModule,
+    ShareIconsModule,
+    MatDialogModule,
+    StoreModule.forRoot({post: postsReducer}),
+    StoreDevtoolsModule.instrument({
+      maxAge: 25, // Retains last 25 states
+    }),
+    EffectsModule.forRoot([PostEffects]),
+    MatAutocompleteModule
   ],
   providers: [DialogComponent],
   bootstrap: [AppComponent]

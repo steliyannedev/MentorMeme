@@ -1,20 +1,47 @@
-.tab-buttons{
-    margin: 0px auto;
+.container{
+    padding: 0;
+    margin: 0 auto;
+    display: flex;
+    width: 100%; 
+    justify-content: space-between;
+    align-items: baseline;
+    
+}
+.logo{
+    cursor: pointer;
+    img{
+        width: 50px;
+        height: 50px;
+    }
+}
 
-    a{
-        text-decoration: none;
-    }
-    .on-click-color{
-        background-color: #333333;
-    }
+.tab-buttons{
+    padding-left: 400px;
+    // a{
+    //     text-decoration: none;
+    // }
+    // .on-click-color{
+    //     background-color: #333333;
+    // }
+}
+.search{
+    padding-left: 100px;
+    // flex: 1;
 }
 .auth{
+    padding-left: 150px;
     button{
-        margin-right: 5px;
+        background-color: #38a3dc;
     }
+    button:last-child{
+        margin-left: 5px;
+    }
+//     button{
+//         margin-right: 5px;
+//     }
 }
 .asd{
-    margin-right: 5px;
+    // margin-right: 5px;
 }
 mat-toolbar-row{
     background-color: #f5f5f5;
@@ -23,5 +50,13 @@ mat-toolbar-row{
     z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
 mat-button-toggle-group {
-    margin-left: 12px;
+    // margin-left: 12px;
 }
+
+// <button _ngcontent-jbn-c160="" mat-raised-button="" color="primary" class="mat-focus-indicator mat-raised-button mat-button-base mat-primary" ng-reflect-color="primary">
+// <span class="mat-button-wrapper">Sign In</span>
+// <div matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]">
+// </div>
+// <div class="mat-button-focus-overlay">
+// </div>
+// </button>

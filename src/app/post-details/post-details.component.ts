@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+import { PostDetailsService } from './post-details.service'
 
 @Component({
   selector: 'app-post-details',
@@ -6,16 +8,27 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./post-details.component.scss']
 })
 export class PostDetailsComponent implements OnInit {
-  comments: string;
-  data: any = {'id': 1, 'post_author': 'gergi', 'post_dislikes': 0, 'post_likes': 0, 'post_title': 'test1', 's3_image_location': "https://s3-image-storing-bucket.s3.eu-central-1.amazonaws.com/image-placeholder-1200x800-1.jpg"}
+  comments: any = [];
+  data: any = {}
   count = 0;
-  constructor() { }
+  @ViewChild('thisDiv') scrollTo: ElementRef;
+
+  constructor(private router: ActivatedRoute, private postDetailService: PostDetailsService) { }
 
   ngOnInit(): void {
+    this.postDetailService.getPostDetails(this.router.params['value']['id']).subscribe( data => {this.data = data})
+    this.postDetailService.getPostComments(this.router.params['value']['id']).subscribe( comments => {this.comments = comments; this.count = this.comments.length}) 
+
+    if(this.router.fragment['_value'] == 'comments'){
+      const interval = setInterval(() => {
+        this.scrollTo.nativeElement.scrollIntoView({behavior: 'smooth'})
+        clearInterval(interval)
+      }, 1000)
+    }
   }
 
   receiveComment($event) {
-    this.comments = $event;
+    this.comments.push($event[0]);
     this.count = this.comments.length;
     console.log(this.comments.length);
   }

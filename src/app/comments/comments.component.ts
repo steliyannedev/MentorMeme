@@ -1,6 +1,7 @@
 import { 
   Component, OnInit, Input, Output, OnChanges, EventEmitter
 } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 
 
 @Component({
@@ -14,7 +15,7 @@ export class CommentsComponent implements OnInit, OnChanges {
   @Output() countComments = new EventEmitter();
   public commentIndex = 0;
 
-  constructor() { }
+  constructor(private http: HttpClient) { }
 
   ngOnInit(): void {
   }
@@ -25,7 +26,9 @@ export class CommentsComponent implements OnInit, OnChanges {
   }
 
   removeComment(no) {
+    console.log(no)
     this.postComment.splice(no, 1);
+    // this.http.delete()
     console.log('After remove array ====> ', this.postComment);
     this.countComments.emit(this.postComment)
   }

@@ -1,10 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { Router, Event, NavigationStart } from '@angular/router'
+import {  Event, NavigationStart } from '@angular/router'
+import {Router} from "@angular/router"
 import {MatDialog, MatDialogRef} from '@angular/material/dialog';
 import {DialogComponent} from '../dialog/dialog.component'
 import { AuthService } from '../auth.service';
 import {DragAndDropComponent} from '../drag-and-drop/drag-and-drop.component'
 import {Auth} from 'aws-amplify';
+import { NavbarService } from './navbar.service'
+
+
+import {FormControl} from '@angular/forms';
+import {Observable} from 'rxjs';
 
 
 @Component({
@@ -17,31 +23,60 @@ export class NavbarComponent implements OnInit {
 
   lastVisitedRouter: string;
   isLoggedIn: boolean;
-  constructor(private route: Router, public dialog: MatDialog, private authService: AuthService) { }
+  control = new FormControl();
+  searchResults: any[] = [];
+  filteredStreets: Observable<string[]>;
+
+  constructor(
+    public dialog: MatDialog, 
+    private authService: AuthService, 
+    private navBarService: NavbarService,
+    private router: Router
+  ) { }
 
   ngOnInit(): void {
-    this.route.events.subscribe((event: Event) => {
+    this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
           this.lastVisitedRouter = event.url.replace('/', '')
       }
-  });
-  this.authService.isLoggedIn$.subscribe(isLogged => {
-    if(isLogged){
-      this.isLoggedIn = true
-    }else{
-      this.isLoggedIn = false
-    }
-  })
+    });
+    this.authService.isLoggedIn$.subscribe(isLogged => {
+      if(isLogged){
+        this.isLoggedIn = true
+      }else{
+        this.isLoggedIn = false
+      }
+    })
+
+    this.control.valueChanges.subscribe(x => {
+      this.test(x)
+    })
+    
+    
   }
+  displayFn(){
+    this.router.navigate([`/post/${this.control.value.post_id}`])
+  }
+  redirectHome(){
+    this.router.navigate([``])
+  }
+  test(word){
+    this.navBarService.searchPost(word).subscribe(value => {
+      this.searchResults = []
+      value.forEach( val => {
+        this.searchResults.push(val)
+      })
+    })
+  }
+
+
   openDialog(): void{
-    console.log(this.lastVisitedRouter)
     this.dialog.open(DialogComponent);
-    // this.authService.isLoggedIn$.subscribe(isLogged => {
-    //   if(isLogged){
-    //     console.log('asd')
-    //   }
-    // })
-    // dialogRef.close()
+    this.authService.isLoggedIn$.subscribe(isLogged => {
+      if(isLogged){
+        this.dialog.closeAll()
+      }
+    })
   }
 
   openUpload(): void{

@@ -1,5 +1,7 @@
-import { Component, AfterViewInit, ViewChild, ElementRef, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { CommentboxService } from './commentbox.service'
 
 @Component({
   selector: 'app-commentbox',
@@ -14,7 +16,7 @@ export class CommentboxComponent implements OnInit {
   public id = 0;
   @Output() usercomment = new EventEmitter();
 
-  constructor(private formBuilder: FormBuilder) { }
+  constructor(private formBuilder: FormBuilder, private route: ActivatedRoute, private commentboxService: CommentboxService) { }
 
   ngOnInit(): void {
     this.createForm();
@@ -32,10 +34,10 @@ export class CommentboxComponent implements OnInit {
     }
     else{
       this.commentInfo.push({
-        commentId: this.id++,
-        currentDate: new Date(),
-        commentTxt: this.commentForm.controls['comment'].value
+        created_on: new Date(),
+        commnet: this.commentForm.controls['comment'].value
       });
+      this.commentboxService.saveComment(this.commentForm.controls['comment'].value, this.route.params['value']['id'])
       this.usercomment.emit(this.commentInfo)
     }
   }

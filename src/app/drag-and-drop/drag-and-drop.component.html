@@ -1,5 +1,14 @@
-<div class="container" appDragAndDrop (fileDropped)="onFileDropped($event)">
-    <input type="file" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
+<form [formGroup]="userForm" (submit)="onSubmit()">
+  <mat-form-field class="example-full-width">
+    <mat-label>Title</mat-label>
+    <input matInput formControlName="title" placeholder="">
+    <mat-error *ngIf="userForm.controls['title'].hasError('required')">
+      Title is <strong>required</strong>
+    </mat-error>
+  </mat-form-field>
+
+  <div class="container" appDragAndDrop (fileDropped)="onFileDropped($event)">
+    <input type="file" formControlName="base64" #fileDropRef id="fileDropRef" multiple (change)="fileBrowseHandler($event.target.files)" />
     <img src="../../assets/outbox.png" alt="">
     <h3>Drag and drop file here</h3>
     <h3>or</h3>
@@ -20,3 +29,9 @@
       <img src="../../assets/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
     </div>
   </div>
+  <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid || !ready_for_upload" class="upload-button">
+    Upload
+  </button>
+  <button mat-raised-button [mat-dialog-close]>Close</button>
+</form>
+

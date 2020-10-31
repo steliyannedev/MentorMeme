@@ -9,13 +9,21 @@
             <div class="details-container">
                 <div class="post-header">
                     <span class="points-comments">
-                        Posted by {{data.post_author}} 0 hours ago
+                        Posted by {{data.author_name}} 0 hours ago
                     </span>
                     <h3 class="author"> {{data.post_title}}</h3>
                 </div>
                 <div class="img-container">
-                    <img [src]="data.s3_image_location" alt="" class="image">
+                    <img [src]="data.img_url" alt="" class="image">
                 </div>
+                <div style="height: 50px;" #thisDiv></div>
+
+                <div class="share-buttons">
+                    <share-button button="twitter"></share-button>
+                    <share-button button="reddit"></share-button>
+                    <share-button button="facebook"></share-button>
+                </div>
+                
                 <div class="container">
                     <div class="card">
                         <div class="commentbox">
