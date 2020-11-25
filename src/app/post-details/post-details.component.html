@@ -1,48 +1,53 @@
-<div class="background-container">
-    <div class="inner-background">
-        <div class="inner-container">
-            <div class="side-options">
-                <img src="../../assets/up-arrow.svg" alt="arrow-up" class="arrow-logo">
-                {{data.post_likes}}
-                <img src="../../assets/down-arrow.svg" alt="arrow-down" class="arrow-logo">
-            </div>
-            <div class="details-container">
-                <div class="post-header">
-                    <span class="points-comments">
-                        Posted by {{data.author_name}} 0 hours ago
-                    </span>
-                    <h3 class="author"> {{data.post_title}}</h3>
-                </div>
-                <div class="img-container">
-                    <img [src]="data.img_url" alt="" class="image">
-                </div>
-                <div style="height: 50px;" #thisDiv></div>
+<div *ngIf="!loaded; else elseBlock" class="spinner">
+    <mat-spinner></mat-spinner>
+</div>
 
-                <div class="share-buttons">
-                    <share-button button="twitter"></share-button>
-                    <share-button button="reddit"></share-button>
-                    <share-button button="facebook"></share-button>
+<ng-template #elseBlock>
+    <div class="background-container">
+        <div class="inner-background">
+            <div class="inner-container">
+                <div class="side-options">
+                    <img src="../../assets/up-arrow.svg" alt="arrow-up" class="arrow-logo">
+                    {{data.post_likes}}
+                    <img src="../../assets/down-arrow.svg" alt="arrow-down" class="arrow-logo">
                 </div>
-                
-                <div class="container">
-                    <div class="card">
-                        <div class="commentbox">
-                            <div class="col-12 col-sm-12 header">
-                                <h4>Comments ({{count}})</h4>
-                            </div>
-                            <div class="col-12 col-sm-12 body">
-                                <div class="comment-container">
-                                        <div class="comment-form">
-                                            <app-commentbox (usercomment)="receiveComment($event)"></app-commentbox>
-                                        </div>
+                <div class="details-container">
+                    <div class="post-header">
+                        <span class="points-comments">
+                            Posted by {{data.author_name}} {{uplaoded}}
+                        </span>
+                        <h3 class="author"> {{data.post_title}}</h3>
+                    </div>
+                    <div class="img-container">
+                        <img [src]="data.img_url" alt="" class="image">
+                    </div>
+                    <div style="height: 50px;" #thisDiv></div>
+
+                    <div class="share-buttons">
+                        <share-button button="twitter"></share-button>
+                        <share-button button="reddit"></share-button>
+                        <share-button button="facebook"></share-button>
+                    </div>
+                    
+                    <div class="container">
+                        <div class="card">
+                            <div class="commentbox">
+                                <div class="col-12 col-sm-12 header">
+                                    <h4>Comments ({{count}})</h4>
+                                </div>
+                                <div class="col-12 col-sm-12 body">
+                                    <div class="comment-container">
+                                            <div class="comment-form">
+                                                <app-commentbox (usercomment)="receiveComment($event)"></app-commentbox>
+                                            </div>
+                                    </div>
                                 </div>
                             </div>
+                            <app-comments [postComment]="comments" (countComments)="recieveCount($event)"></app-comments>
                         </div>
-                        <app-comments [postComment]="comments" (countComments)="recieveCount($event)"></app-comments>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
-
+</ng-template>

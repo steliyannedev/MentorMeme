@@ -1,1 +1,31 @@
-<p>page-container works!</p>
+<div
+    infinite-scroll
+    [infiniteScrollDistance]="scrollDistance"
+    [infiniteScrollUpDistance]="scrollUpDistance"
+    [infiniteScrollThrottle]="throttle"
+    (scrolled)="onScrollDown()"
+>
+    <div *ngFor="let record of dataForDisplaying" class="post-container">
+        <div class="side-options">
+            <img src="../../assets/up-arrow.svg" alt="arrow-up" class="arrow-logo" (click)="upvote(record.post_id)">
+            {{record.post_likes}}
+            <img src="../../assets/down-arrow.svg" alt="arrow-down" class="arrow-logo" (click)="downvote(record.post_id)">
+        </div>
+        <div class="details-container" (click)="openDetailPage(record)">
+            <div class="post-header">
+                <h3 class="author"> {{record.post_title}}</h3>
+            </div>
+            <div class="img-container">
+                <img [src]="record.img_url" alt="" class="image">
+            </div>
+            <div class="footer">
+                <div class="footer-chat">
+                    <button (click)="focusCommentbox(record)">
+                        <img src="../../assets/chat-bubble.svg" alt="chat" class="chat-logo">
+                        <span class="chat-text">{{record.number_of_comments}} Comments</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

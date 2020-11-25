@@ -57,6 +57,9 @@ export class NavbarComponent implements OnInit {
   displayFn(){
     this.router.navigate([`/post/${this.control.value.post_id}`])
   }
+  displayValue(post){
+    return post && post.post_title
+  }
   redirectHome(){
     this.router.navigate([``])
   }
@@ -69,14 +72,8 @@ export class NavbarComponent implements OnInit {
     })
   }
 
-
   openDialog(): void{
     this.dialog.open(DialogComponent);
-    this.authService.isLoggedIn$.subscribe(isLogged => {
-      if(isLogged){
-        this.dialog.closeAll()
-      }
-    })
   }
 
   openUpload(): void{

@@ -36,7 +36,7 @@ export class NewComponent implements OnInit {
   }
 
   getRecords(){
-    this.store.dispatch(loadPosts())
+    // this.store.dispatch(loadPosts())
     this.store.pipe(
       select(state => state.post['initialPosts']),
       skip(1)
@@ -60,6 +60,6 @@ export class NewComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.getRecords()
+    // this.getRecords()
   }
 }

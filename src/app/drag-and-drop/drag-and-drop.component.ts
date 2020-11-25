@@ -18,17 +18,13 @@ export class DragAndDropComponent implements OnInit{
   constructor(
     private formBuilder: FormBuilder, 
     private authService: AuthService, 
-    private dragAndDropService: DragAndDropService,
-    private dialog: MatDialog
+    private dragAndDropService: DragAndDropService
   ){}
 
   ngOnInit(): void {
     this.createForm();
   }
 
-  saveUser(){
-    console.log('asd')
-  }
   createForm() {
     this.userForm = this.formBuilder.group({
       title: ['', Validators.required],
@@ -57,7 +53,6 @@ export class DragAndDropComponent implements OnInit{
     reader.readAsDataURL(file);
     reader.onload = () => {
       this.userForm.controls['base64'].value = reader.result      
-      console.log(this.userForm.controls['base64'].value)
     };
     reader.onerror = function (error) {
       console.log('Error: ', error);

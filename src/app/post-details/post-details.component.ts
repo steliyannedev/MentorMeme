@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { PostDetailsService } from './post-details.service'
+import * as moment from 'moment'
+
 
 @Component({
   selector: 'app-post-details',
@@ -11,12 +13,14 @@ export class PostDetailsComponent implements OnInit {
   comments: any = [];
   data: any = {}
   count = 0;
+  uplaoded: string;
+  loaded: boolean = false;
   @ViewChild('thisDiv') scrollTo: ElementRef;
 
   constructor(private router: ActivatedRoute, private postDetailService: PostDetailsService) { }
 
   ngOnInit(): void {
-    this.postDetailService.getPostDetails(this.router.params['value']['id']).subscribe( data => {this.data = data})
+    this.postDetailService.getPostDetails(this.router.params['value']['id']).subscribe( data => {this.data = data; this.uplaoded = moment(data['created_on']).fromNow(); this.loaded = true})
     this.postDetailService.getPostComments(this.router.params['value']['id']).subscribe( comments => {this.comments = comments; this.count = this.comments.length}) 
 
     if(this.router.fragment['_value'] == 'comments'){
@@ -25,12 +29,12 @@ export class PostDetailsComponent implements OnInit {
         clearInterval(interval)
       }, 1000)
     }
+
   }
 
   receiveComment($event) {
     this.comments.push($event[0]);
     this.count = this.comments.length;
-    console.log(this.comments.length);
   }
 
   recieveCount($event) {

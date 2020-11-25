@@ -34,6 +34,8 @@
     "aws-amplify": "^3.0.20",
     "aws-amplify-angular": "^5.0.20",
     "bootstrap": "^4.4.0",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
     "ngx-infinite-scroll": "^9.0.0",
     "ngx-sharebuttons": "^8.0.1",
     "rxjs": "~6.5.5",

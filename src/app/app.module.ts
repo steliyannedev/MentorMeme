@@ -20,6 +20,7 @@ import {MatButtonToggleModule} from '@angular/material/button-toggle';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 import { AuthService } from './auth.service'
 import { DialogComponent } from './dialog/dialog.component';
@@ -43,6 +44,7 @@ import { PostEffects } from './effects/posts.effects';
 import { ShareButtonsModule } from 'ngx-sharebuttons/buttons';
 import { ShareIconsModule } from 'ngx-sharebuttons/icons';
 import { PageContainerComponent } from './page-container/page-container.component';
+
 
 /* Configure Amplify resources */
 Amplify.configure(awsconfig);
@@ -78,11 +80,21 @@ Amplify.configure(awsconfig);
     MatButtonModule,
     MatButtonToggleModule,
     MatInputModule,
+    MatProgressSpinnerModule,
     AmplifyUIAngularModule,
     ShareButtonsModule,
     ShareIconsModule,
     MatDialogModule,
-    StoreModule.forRoot({post: postsReducer}),
+    StoreModule.forRoot({post: postsReducer}, {
+      runtimeChecks: {
+        strictStateImmutability: false,
+        strictActionImmutability: false,
+        strictStateSerializability: false,
+        strictActionSerializability: false,
+        strictActionWithinNgZone: false,
+        strictActionTypeUniqueness: false,
+      }
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25, // Retains last 25 states
     }),

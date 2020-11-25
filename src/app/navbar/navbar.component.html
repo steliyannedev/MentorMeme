@@ -16,8 +16,9 @@
           <input type="text"
                  placeholder="Search..."
                  [formControl]="control"
-                 [matAutocomplete]="auto">
-          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="displayFn()">
+                 [matAutocomplete]="auto"
+          >
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="displayFn()" [displayWith]="displayValue">
             <mat-option *ngFor="let posts of searchResults" [value]="posts">
               {{posts.post_title}}
             </mat-option>
@@ -25,8 +26,7 @@
         </form>
       </div>
       <div class="auth" *ngIf="!isLoggedIn; else elseBlock">
-        <button mat-raised-button color="primary">Sign In</button>
-        <button mat-raised-button color="primary" (click)="openDialog()">Register</button>
+        <button mat-raised-button color="primary" (click)="openDialog()">Sign In / Register</button>
       </div>
       <ng-template #elseBlock>
         <div class="auth">
