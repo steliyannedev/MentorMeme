@@ -1,12 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import {  Event, NavigationStart } from '@angular/router'
 import {Router} from "@angular/router"
-import {MatDialog, MatDialogRef} from '@angular/material/dialog';
+import {MatDialog, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {DialogComponent} from '../dialog/dialog.component'
 import { AuthService } from '../auth.service';
 import {DragAndDropComponent} from '../drag-and-drop/drag-and-drop.component'
 import {Auth} from 'aws-amplify';
 import { NavbarService } from './navbar.service'
+
+import {NgbModal} from '@ng-bootstrap/ng-bootstrap';
 
 
 import {FormControl} from '@angular/forms';
@@ -26,23 +28,35 @@ export class NavbarComponent implements OnInit {
   control = new FormControl();
   searchResults: any[] = [];
   filteredStreets: Observable<string[]>;
-
+  dialogRef;
+  modalRef;
+  
   constructor(
     public dialog: MatDialog, 
     private authService: AuthService, 
     private navBarService: NavbarService,
-    private router: Router
+    private router: Router,
+    private dialogReff: MatDialogRef<DialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private modal: NgbModal
   ) { }
 
   ngOnInit(): void {
     this.router.events.subscribe((event: Event) => {
       if (event instanceof NavigationStart) {
-          this.lastVisitedRouter = event.url.replace('/', '')
+        this.control.setValue('')
+        this.lastVisitedRouter = event.url.replace('/', '')
+        if(this.lastVisitedRouter == ''){
+          this.lastVisitedRouter = 'new'
+        }
       }
     });
     this.authService.isLoggedIn$.subscribe(isLogged => {
       if(isLogged){
         this.isLoggedIn = true
+        if(this.modalRef != undefined){
+          this.modalRef.close()
+        }
       }else{
         this.isLoggedIn = false
       }
@@ -56,6 +70,7 @@ export class NavbarComponent implements OnInit {
   }
   displayFn(){
     this.router.navigate([`/post/${this.control.value.post_id}`])
+    this.control.setValue('')
   }
   displayValue(post){
     return post && post.post_title
@@ -73,7 +88,7 @@ export class NavbarComponent implements OnInit {
   }
 
   openDialog(): void{
-    this.dialog.open(DialogComponent);
+    this.modalRef = this.modal.open(DialogComponent)
   }
 
   openUpload(): void{

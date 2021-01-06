@@ -7,7 +7,7 @@
                     <div class="actions">
                         <span>{{post.created_on | date: 'dd/MM/yyyy'}}</span>
                         <span class="divider"></span>
-                        <button class="btn btn-sm btn-danger" (click)="removeComment(post.comment_id)">
+                        <button class="btn btn-sm btn-danger" (click)="removeComment(i)">
                             <i class="fa fa-trash"></i>
                         </button>
                 </div>

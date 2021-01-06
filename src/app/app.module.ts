@@ -17,7 +17,7 @@ import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material/button';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import {MatDialogModule} from '@angular/material/dialog';
+import {MatDialogModule, MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatInputModule} from '@angular/material/input';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
@@ -101,7 +101,17 @@ Amplify.configure(awsconfig);
     EffectsModule.forRoot([PostEffects]),
     MatAutocompleteModule
   ],
-  providers: [DialogComponent],
+  entryComponents: [
+    DialogComponent,
+  ],
+  providers: [{
+    provide: MatDialogRef,
+    useValue: {}
+  },
+  {
+    provide: MAT_DIALOG_DATA,
+    useValue:{}
+  }, DialogComponent],
   bootstrap: [AppComponent]
 })
 export class AppModule {

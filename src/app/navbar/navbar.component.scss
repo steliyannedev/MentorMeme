@@ -17,16 +17,9 @@
 
 .tab-buttons{
     padding-left: 400px;
-    // a{
-    //     text-decoration: none;
-    // }
-    // .on-click-color{
-    //     background-color: #333333;
-    // }
 }
 .search{
     padding-left: 100px;
-    // flex: 1;
 }
 .auth{
     padding-left: 150px;
@@ -36,12 +29,6 @@
     button:last-child{
         margin-left: 5px;
     }
-//     button{
-//         margin-right: 5px;
-//     }
-}
-.asd{
-    // margin-right: 5px;
 }
 mat-toolbar-row{
     background-color: #f5f5f5;
@@ -49,14 +36,3 @@ mat-toolbar-row{
     top: 0; /* Sets the sticky toolbar to be on top */
     z-index: 1000; /* Ensure that your app's content doesn't overlap the toolbar */
 }
-mat-button-toggle-group {
-    // margin-left: 12px;
-}
-
-// <button _ngcontent-jbn-c160="" mat-raised-button="" color="primary" class="mat-focus-indicator mat-raised-button mat-button-base mat-primary" ng-reflect-color="primary">
-// <span class="mat-button-wrapper">Sign In</span>
-// <div matripple="" class="mat-ripple mat-button-ripple" ng-reflect-disabled="false" ng-reflect-centered="false" ng-reflect-trigger="[object HTMLButtonElement]">
-// </div>
-// <div class="mat-button-focus-overlay">
-// </div>
-// </button>

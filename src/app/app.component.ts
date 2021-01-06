@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { AuthService } from './auth.service';
+import { onAuthUIStateChange, CognitoUserInterface, AuthState } from '@aws-amplify/ui-components';
+
 
 @Component({
   selector: 'app-root',
@@ -8,17 +10,21 @@ import { AuthService } from './auth.service';
 })
 export class AppComponent implements OnInit {
   isLoggedIn = false;
-  user: {id: string; username: string; email: string}
+  user: CognitoUserInterface | undefined;
+  authState: AuthState;
+
 
   title = 'MentorMeme';
-  constructor(private authService: AuthService){}
+  constructor(private authService: AuthService, private ref: ChangeDetectorRef){}
   ngOnInit(): void {
-    this.authService.isLoggedIn$.subscribe(
-      isLoggedIn => (this.isLoggedIn = isLoggedIn)
-    );
-    this.authService.auth$.subscribe(({id, username, email}) => {
-      this.user = {id, username, email}
+    onAuthUIStateChange((authState, authData) => {
+      this.authState = authState;
+      this.user = authData as CognitoUserInterface;
+      this.ref.detectChanges();
     })
+  }
+  ngOnDestroy() {
+    return onAuthUIStateChange;
   }
 }
 

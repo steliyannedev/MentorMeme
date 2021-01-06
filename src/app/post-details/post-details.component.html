@@ -7,9 +7,19 @@
         <div class="inner-background">
             <div class="inner-container">
                 <div class="side-options">
-                    <img src="../../assets/up-arrow.svg" alt="arrow-up" class="arrow-logo">
-                    {{data.post_likes}}
-                    <img src="../../assets/down-arrow.svg" alt="arrow-down" class="arrow-logo">
+                    <img 
+                        src="../../assets/up-arrow.svg" 
+                        alt="arrow-up" 
+                        class="arrow-logo"
+                        [ngStyle]="allLikedPostsByUser.includes(data.post_id) ? {'filter': 'invert(61%) sepia(73%) saturate(5794%) hue-rotate(182deg) brightness(102%) contrast(106%)'} : {'fill': 'red'}"
+                    >
+                        {{data.post_likes}}
+                    <img 
+                        src="../../assets/down-arrow.svg" 
+                        alt="arrow-down" 
+                        class="arrow-logo"
+                        [ngStyle]="allDislikedPostsByUser.includes(data.post_id) ? {'filter': 'invert(41%) sepia(38%) saturate(4730%) hue-rotate(336deg) brightness(102%) contrast(89%)'} : {'fill': 'red'}"
+                    >
                 </div>
                 <div class="details-container">
                     <div class="post-header">

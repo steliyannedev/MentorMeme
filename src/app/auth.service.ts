@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import Auth from '@aws-amplify/auth';
+import Auth, { CognitoHostedUIIdentityProvider } from '@aws-amplify/auth'
 import { Hub } from '@aws-amplify/core';
 import { BehaviorSubject } from 'rxjs';
 import { map } from 'rxjs/operators';
@@ -34,8 +34,10 @@ export class AuthService {
       (user: any) => this.setUser(user),
       _err => this._authState.next(initialAuthState)
     );
+    Auth.federatedSignIn({provider: CognitoHostedUIIdentityProvider.Google})
     Hub.listen('auth', ({payload: {event, data, message}})=>{
       if (event === 'signIn'){
+        console.log(data)
         this.setUser(data)
       }else{
         this._authState.next(initialAuthState)

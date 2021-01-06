@@ -13,7 +13,7 @@ export const initialState: IState = {
 }
 
 export const postsReducer = createReducer(initialState, 
-    on(PostActions.successLoad, (state, {payload}) => ({...state, initialPosts: [...initialState.posts, ...payload]})),
+    on(PostActions.successLoad, (state, {payload}) => ({...state, posts: [...initialState.posts, ...payload]})),
     on(PostActions.upvotePost, (state, {payload}) => {
         const postsCopy = [...state.posts]
         const result = postsCopy.map(ele => {
@@ -24,7 +24,7 @@ export const postsReducer = createReducer(initialState,
         })
         return {
             ...state,
-            initialPosts: [...initialState.posts, ...result]
+            posts: [...initialState.posts, ...result]
         }
     })
 )

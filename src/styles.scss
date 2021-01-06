@@ -9,7 +9,10 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif;}
 /* Importing Bootstrap SCSS file. */
 @import '~bootstrap/scss/bootstrap';
 
-
+.modal-content{
+  width: 0px;
+  height: 0px;
+}
 .card{
     padding: 25px 25px;
     margin-top: 20px;

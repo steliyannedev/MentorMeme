@@ -3,6 +3,7 @@ import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { map, switchMap, catchError, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
 import { PostsService } from '../posts.service'
+import * as _ from 'lodash'
  
 @Injectable()
 export class PostEffects {
@@ -13,7 +14,7 @@ export class PostEffects {
             map(action => action),
             mergeMap((action) => this.postService.getPosts(action['paginator'], action['number_of_posts'])
                     .pipe(
-                        map((posts: any) => ({ type: '[Posts] Success Load Posts', payload: posts })),
+                        map((posts: any) => ({ type: '[Posts] Success Load Posts', payload: _.chunk(posts, 5) })),
                         catchError(() => of({type: '[Posts] Fail Load Posts'}))
                     )
                 )

@@ -1,26 +1,42 @@
-import { Component, OnInit } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog'
-import { AuthService } from '../auth.service';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { FormFieldTypes } from '@aws-amplify/ui-components';
+
 
 @Component({
   selector: 'app-dialog',
   templateUrl: './dialog.component.html',
-  styleUrls: ['./dialog.component.scss']
+  styleUrls: ['./dialog.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 export class DialogComponent implements OnInit {
+  isLogged: boolean;
+  formFields: FormFieldTypes;
 
-  constructor(private dialog: MatDialog, private authService: AuthService) { }
-
-  ngOnInit(): void {
-    this.authService.isLoggedIn$.subscribe(isLogged => {
-      if(isLogged){
-        this.dialog.closeAll()
-      }
-    })
+  constructor() {
+    this.formFields = [
+      {
+        type: "username",
+        label: "Username*",
+        placeholder: "Username",
+        required: true,
+      },
+      {
+        type: "password",
+        label: "Password*",
+        placeholder: "Password",
+        required: true,
+      },
+      {
+        type: "email",
+        label: "Email Address*",
+        placeholder: "Email",
+        required: true,
+      },
+    ];
   }
 
-  closeDialog(): void{
-    this.dialog.closeAll()
+  ngOnInit(): void {
+
   }
 
 }

@@ -29,9 +29,11 @@
       <img src="../../assets/ic-delete-file.svg" class="delete" width="20px" alt="file" (click)="deleteFile(i)">
     </div>
   </div>
-  <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid || !ready_for_upload" class="upload-button">
-    Upload
-  </button>
-  <button mat-raised-button [mat-dialog-close]>Close</button>
+  <div class="buttons">
+    <button mat-raised-button color="primary" type="submit" [disabled]="!userForm.valid || !ready_for_upload" class="upload-button">
+      Upload
+    </button>
+    <button mat-raised-button [mat-dialog-close]>Close</button>
+  </div>
 </form>
 

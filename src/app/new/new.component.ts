@@ -43,13 +43,13 @@ export class NewComponent implements OnInit {
     ).subscribe(result => {this.data.push(result.slice(1,11))})
   }
 
-  upvote(post_id){
-    this.postService.upvotePost(post_id)
-  }
+  // upvote(post_id){
+  //   this.postService.upvotePost(post_id)
+  // }
 
-  downvote(post_id){
-    this.postService.downvotePost(post_id)
-  }
+  // downvote(post_id){
+  //   this.postService.downvotePost(post_id)
+  // }
 
   focusCommentbox(record){
     this.router.navigate([`/post/${record.post_id}`], {fragment: 'comments'})

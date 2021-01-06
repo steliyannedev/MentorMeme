@@ -6,6 +6,10 @@
 */
 {
   "files": [],
+  "compilerOptions": {
+    "lib": ["es5", "dom", "dom.iterable", "ES2015.Iterable"],
+    "target": "es5"
+  },
   "references": [
     {
       "path": "./tsconfig.app.json"
